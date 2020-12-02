@@ -54,7 +54,7 @@ Target model:
       {"name":"e","width":120,"height":50},
     ],
 
-    // Derived
+    // Should be derived
     "links":[
       {"source":0,"target":1}, // These should be generated as a function of dependencies using keys
       {"source":0,"target":2},
@@ -63,7 +63,7 @@ Target model:
       {"source":3,"target":4}
     ],
 
-    // Derived
+    // Should be derived
 	"groups":[
 	  {"leaves":[0,1]},
       {"leaves":[2,3,4]}
