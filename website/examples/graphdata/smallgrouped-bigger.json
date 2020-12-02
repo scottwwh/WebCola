@@ -1,0 +1,31 @@
+﻿{
+    "nodes":[
+      {"name":"a","width":120,"height":50},
+      {"name":"b","width":120,"height":50},
+      {"name":"c","width":120,"height":50},
+      {"name":"d","width":120,"height":50},
+      {"name":"e","width":120,"height":50},
+      {"name":"f","width":120,"height":50},
+      {"name":"g","width":120,"height":50},
+      {"name":"h","width":120,"height":50},
+      {"name":"i","width":120,"height":50}
+    ],
+    "links":[
+      {"source":1,"target":2},
+      {"source":2,"target":3},
+      {"source":3,"target":4},
+      {"source":4,"target":8},
+      {"source":0,"target":1},
+      {"source":2,"target":0},
+      {"source":3,"target":5},
+      {"source":0,"target":5},
+      {"source":6,"target":7},
+      {"source":6,"target":8}
+    ],
+	"groups":[
+	  {"leaves":[0,5], "groups":[1]},
+	  {"leaves":[1,2]},
+	  {"leaves":[3,4]},
+	  {"leaves":[6,7,8]}
+	]
+}
