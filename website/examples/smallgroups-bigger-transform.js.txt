@@ -1,0 +1,108 @@
+
+const source = [
+    [
+        {
+            id: "a",
+            dependencies: [
+                "b",
+                "c"
+            ]
+        },
+        {
+            id: "b",
+            dependencies: [
+                "d",
+                "e"
+            ]
+        }
+    ],
+    [
+        {
+            id: "c"
+        },
+        {
+            id: "d",
+            dependencies: [
+                "e"
+            ]
+        },
+        {
+            id: "e"
+        }
+    ]
+];
+
+const WIDTH = 120;
+const HEIGHT = 50;
+
+hierarchalGroupingLayout = data => {
+    // Expected output format for Cola
+    const layout = {
+        nodes: [],
+        links: [],
+        groups: []
+    }
+
+    // Dict to support source data that uses meaningful keys
+    const dict = {};
+    let index = 0;
+    for (var i = 0; i < data.length; i++) {
+        for (var j = 0; j < data[i].length; j++) {
+            const key = data[i][j].id;
+            dict[key] = index;
+            index++;
+        }
+    }
+    console.log('Dict:', dict);
+
+    /*
+      {"name":"a","width":120,"height":50},
+      {"name":"b","width":120,"height":50},
+      {"name":"c","width":120,"height":50},
+      {"name":"d","width":120,"height":50},
+      {"name":"e","width":120,"height":50},
+    */
+
+    // Not ideal, because it assumes that leaves are always at a depth of 2
+    data.forEach((group, i) => {
+
+        // Nodes
+        const nodesGroup = group.map((item) => {
+            return {
+                name: item.id,
+                width: WIDTH,
+                height: HEIGHT
+            }
+        });
+        layout.nodes = layout.nodes.concat(...nodesGroup);
+        // console.log(layout.nodes);
+
+        // Links
+        const linksGroup = group.map((item) => {
+            let links = [];
+
+            if (item.dependencies) {
+                links = item.dependencies.map(dependency => {
+                    return {
+                        source: dict[item.id],
+                        target: dict[dependency],
+                    }
+                });
+            }
+
+            return links;
+        });
+        layout.links = layout.links.concat(...linksGroup);
+        // console.log(layout.links);
+
+        // Groups
+        const leaves = group.map((item) => {
+            return dict[item.id];
+        });
+        layout.groups = layout.groups.concat({leaves});
+    });
+    return layout;
+}
+
+const data = hierarchalGroupingLayout(source);
+console.log('data', JSON.stringify(data));
