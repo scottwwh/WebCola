@@ -62,6 +62,13 @@
     <h1>cola.js</h1>
     <h2>Constraint-Based Layout in the Browser</h2>
 
+    <p>WIPs</p>
+    <ul>
+        <li><a href="examples/smallgroups-bigger.html">Small groups (bigger)</a></li>
+    </ul>
+
+    <hr />
+
     <div id="examples"></div>
 
     <script src="extern/d3.v3.min.js?3.0.0rc1"></script>
@@ -115,7 +122,8 @@
             return array;
         }
         d3.select("#examples").selectAll(".example")
-            .data(shuffle(examples).slice(0, 24))
+            // .data(shuffle(examples).slice(0, 24))
+            .data(examples)
           .enter()
             .append('div')
             .attr('class', 'examplecontainer')
